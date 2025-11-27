@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_order_form_inherit_deadline" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit.deadline</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Extra Info">
+                        <group>
+                            <field name="delivery_deadline"
+                                groups='sale_enhancement.security_sales_manager_group' />
+                            <field name="delivery_deadline"
+                                readonly="1"
+                                groups="sale_enhancement.security_sales_user_group" />
+                            <field name="priority_level"
+                                readonly="1"
+                                groups='sale_enhancement.security_sales_user_group' />
+                            <field name="priority_level"
+                                groups='sale_enhancement.security_sales_manager_group' />
+                            <field name="customer_rating" />
+                            <field name="is_deadline_overdue" readonly="1" />
+                            <field name="deadline_delay_days" readonly="1" />
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+        <record id="view_order_list_decorations_inherit" model="ir.ui.view">
+            <field name="name">sale.order.list.decorations</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding" />
+            <field name="arch" type="xml">
+                <xpath expr="//list" position="attributes">
+                    <attribute name="decoration-danger">is_deadline_overdue</attribute>
+                    <attribute name="decoration-warning">priority_level == 'high'</attribute>
+                    <attribute name="decoration-success">priority_level == 'low'</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.actions.server" id="action_extend_deadline">
+            <field name="name">Mark Deadline Extended by 3 Days</field>
+            <field name="model_id" ref="sale.model_sale_order" />
+            <field name="binding_model_id" ref="sale.model_sale_order" />
+            <field name="binding_view_types">form,list</field>
+            <field name="state">code</field>
+            <field name="code">
+                action=records.action_extend_deadline_by_3_days()
+            </field>
+        </record>
+
+    </data>
+</odoo>

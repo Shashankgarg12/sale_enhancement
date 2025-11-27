@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="menu_sale_orders" model="website.menu">
+        <field name="name">Sale Orders</field>
+        <field name="url">/sale_orders</field>
+        <field name="parent_id" search='[("parent_id","=",False),("website_id","=",1)]' />
+        <field name="sequence" type="int">0</field>
+        <field name="website_id" ref="website.default_website" />
+    </record>
+
+</odoo>

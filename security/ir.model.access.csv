@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+uesr1,sales_user,model_sale_order,security_sales_user_group,1,0,0,0
+uesr2,sales_manager,model_sale_order,security_sales_manager_group,1,1,1,1

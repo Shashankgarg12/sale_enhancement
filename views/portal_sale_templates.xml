@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_sale_orders_page" name="Portal Sale Orders List">
+        <t t-call="website.layout">
+            <div class="container mt-4">
+
+                <h2>My Sale Orders</h2>
+
+                <div class="mt-3 mb-3">
+                    <strong>Filter by Priority:</strong>
+                    <a t-attf-href="/sale_orders?priority=high"
+                        class="btn btn-sm btn-danger ml-2">High</a>
+                    <a t-attf-href="/sale_orders?priority=medium"
+                        class="btn btn-sm btn-warning ml-2">Medium</a>
+                    <a t-attf-href="/sale_orders?priority=low"
+                        class="btn btn-sm btn-success ml-2">Low</a>
+                    <a href="/sale_orders"
+                        class="btn btn-sm btn-secondary ml-2">Reset</a>
+
+                    <br />
+                    <br />
+
+                    <strong>Overdue Orders:</strong>
+                    <a t-attf-href="/my/sale_orders?overdue=1"
+                        class="btn btn-sm btn-dark ml-2">Show Only Overdue</a>
+                </div>
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Order</th>
+                            <th>Date</th>
+                            <th>Priority</th>
+                            <th>Deadline</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="orders" t-as="order">
+                            <tr>
+                                <td t-esc="order.name" />
+                                <td t-esc="order.date_order" />
+                                <td t-esc="order.priority_level" />
+                                <td t-esc="order.delivery_deadline" />
+                                <td t-esc="order.state" />
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+
+            </div>
+        </t>
+    </template>
+</odoo>
